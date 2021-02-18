@@ -1,0 +1,219 @@
+
+<head>
+    <title>Mobile app vulnerabilities in 2020 and potential threats in 2021</title>  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">     
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    
+    
+</head>
+<body class="body-green">
+    <div class="page-wrapper">
+        <!-- Налаштування шапки-->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">My</span><span class="text-bold">Blog</span> 
+                        </a>
+                    </h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li> 
+                    <li class="active">Mobile app vulnerabilities in 2020 and potential threats in 2021</li> 
+                </ol>
+            </div>
+        </header>
+         <!--Блок 1-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center"> 
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i>Mobile app vulnerabilities in 2020 and potential threats in 2021</h1> <!--Назва статті -->
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: 16/02/2021</div> <!--Дата редагування-->
+                </div>
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                                <!--кінець Блок 1-->
+
+                                <!--Наповнення Сторінки -->
+                                <section id="Executivesummary-section" class="doc-section">
+                                    <h2 class="section-title">Executive summary</h2>
+                                    <div class="section-block">
+                                        <p> Nowadays people prefer to use their smartphone for watching video, playing games, ordering food, chatting with friends and so on. We use mobile devices everywhere and store a lot of reliable information about us. In times of cyberwars and insecurity, we must take care of our privacy and identity. Moreover, it depends not only on us, but also on mobile security. This research shows and describes the state of phone and mobile application security in 2020, after which we try to predict the potential security threats in 2021.</p>
+                                    </div>
+                                </section>
+                                <section id="Researchpreparation-section" class="doc-section">
+                                    <h2 class="section-title">Research preparation</h2>
+                                    <div class="section-block">
+                                        <p>While checking the catalog of Common Vulnerabilities and Exposures (CVE), we found about a thousand vulnerabilities in mobile applications and devices discovered in 2020. We have categorized them into major vulnerability categories and converted them to percentage diagrams, what we can operate with in the research. First, the vulnerabilities were calculated for Android and IOS platforms separately in order to investigate the main weaknesses in each of the architectures. After that we combined our statistics to show the main security flaws in the mobile environment general</p>
+                                    </div>
+                                </section>
+                                <section id="Statistics-section" class="doc-section">
+                                    <h2 class="section-title">Statistics</h2>
+                                    <div class="section-block">
+                                        <P>Comparing the statistics for IOS and Android platforms, it is important to note that the researchers found more than twice fewer vulnerabilities in IOS compared to Android architecture. The most general vulnerability found in IOS is code execution, while in Android it is information disclosure. Let's take a look at the diagrams presented and highlight the most common types of vulnerabilities.</P>
+                                        <img src="img/1.jpg">
+                                        <img src="img/2.jpg">
+                                        <img src="img/2.jpg">
+                                    </div>
+                                </section>
+                                <section id="1.InformationDisclosure-section" class="doc-section">
+                                    <h2 class="section-title">1.	Information Disclosure</h2>
+                                    <div id="step1"  class="section-block">
+                                        <h3 class="block-title">1.	Information Disclosure</h3>
+                                        <p>The most common vulnerability found in the mobile environment in 2020 is information disclosure. There are many vectors of the information disclosure and leakage ranging with logging and debugging in production environments to privilege escalation, remote code execution and full device hijacking. The impact from this vulnerability may vary from low to critical level, because information is too vast and there are too many ways to get it.
+                                            The occurrence of information leakage is mainly a human factor, because this weakness consists simply of human mistakes such as hardcoded API keys and credentials, logging and debugging output, exported activities, lack or weak cryptography and so on. 
+                                            There are mentioned the most interesting and cruicial CVEs:                                                            </p>
+                                        <p>  - CVE-2020-0497</p>
+                                        <p>In canUseBiometric of BiometricServiceBase, there is a missing permission check. This could lead to local information disclosure with no additional execution privileges needed. User interaction is not needed for exploitation.Product: AndroidVersions: Android-11Android ID: A-158481661</p>
+                                        <p>  - CVE-2020-0390</p>
+                                        <p>In the app zygote SE Policy, there is a possible permissions bypass. This could lead to local information disclosure with no additional execution privileges needed. User interaction is not needed for exploitation.Product: AndroidVersions: Android-10 Android-11Android ID: A-157598026</p>
+                                        <p>  - CVE-2020-0379</p>    
+                                        <p>In the Bluetooth service, there is a possible spoofing attack due to a logic error. This could lead to remote information disclosure of sensitive information with no additional execution privileges needed. User interaction is needed for exploitation.Product: AndroidVersions: Android-8.0 Android-8.1 Android-9 Android-10 Android-11Android ID: A-150156492</p>
+                                    </div>
+                                </section>
+
+                                <section id="2.Privilegeescalation-section" class="doc-section">
+                                    <h2 class="section-title">2.	Privilege escalation</h2>
+                                    <div id="step1"  class="section-block">
+                                        <h3 class="block-title">2.	Privilege escalationn</h3>
+                                        <p>Privilege escalation vulnerabilities often arise due to authentication and access control security flaws. Insufficient permission checking leads to granting users unauthorized access to actions that should be protected from them or the application in general. 
+                                            Exploiting this type of vulnerability in mobile applications can lead to gaining administrative rights, other users' rights or even to system rights by exploiting binary weaknesses at the kernel level such as buffer overflow, heap and memory corruption and so on. 
+                                            Privilege escalation vulnerability was ranked second on the list of mobile vulnerabilities in 2020, indicating the risk of an increased number of mobile malware being granted privileged access to a device.
+                                            The most significant vulnerabilities are shown there:                                                            </p>
+                                        <p>  - CVE-2020-0481</p>
+                                        <P>In AndroidManifest.xml, there is a possible permissions bypass. This could lead to local escalation of privilege allowing a non-system app to send a broadcast it shouldn't have permissions to send, with no additional execution privileges needed. User interaction is not needed for exploitation.Product: AndroidVersions: Android-11Android ID: A-157472962
+                                        </P>
+                                        <p>  - CVE-2020-0209</p>
+                                        <p>In multiple functions of AccountManager.java, there is a possible permissions bypass. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.Product: AndroidVersions: Android-10Android ID: A-145206842</p>
+                                    </div>
+                                </section>
+
+                                <section id="3.Codeexecution-section" class="doc-section">
+                                    <h2 class="section-title">3.	Code execution</h2>
+                                    <div id="step1"  class="section-block">
+                                        <h3 class="block-title">3.	Code execution</h3>
+                                        <p>Code execution vulnerability was ranked third overall and first in the list of IOS vulnerabilities. The vulnerability ranges from arbitrary to remote code execution (RCE), which is the most dangerous and high-paid vulnerability. Code execution arises due to weak binary protection in the form of buffer overflow, heap corruption, memory leakage and improper memory permissions checks. Unfortunately, assuming that IOS is a more secure operating system than Android, it turns out to be more vulnerable to code execution vulnerability.</p> 
+                                        <P>There are some examples of the vulnerability found in 2020:</P>
+                                        <p>  - CVE-2020-1909	</p>
+                                        <p>A use-after-free in a logging library in WhatsApp for IOS prior to v2.20.111 and WhatsApp Business for IOS prior to v2.20.111 could have resulted in memory corruption, crashes and potentially code execution. This could have happened only if several events occurred together in sequence, including receiving an animated sticker while placing a WhatsApp video call on hold.</p> 
+                                        <p>  - CVE-2020-0438	</p>
+                                        <p>  In the AIBinder_Class constructor of ibinder.cpp, there is a possible arbitrary code execution due to uninitialized data. This could lead to local escalation of privilege if a process were using libbinder_ndk in a vulnerable way with no additional execution privileges needed. User interaction is not needed for exploitation.Product: AndroidVersions: Android-11 Android-10Android ID: A-161812320</p> 
+                                        <p>  - CVE-2020-6828</p>
+                                        <p> malicious Android application could craft an Intent that would have been processed by Firefox for Android and potentially result in a file overwrite in the user's profile directory. One exploitation vector for this would be to supply a user.js file providing arbitrary malicious preference values. Control of arbitrary preferences can lead to sufficient compromise such that it is generally equivalent to arbitrary code execution.<br> *Note: This issue only affects Firefox for Android. Other operating systems are unaffected.*. This vulnerability affects Firefox ESR  68.7. </p>
+                                    </div>
+                                </section>
+            
+                                <section id="4.DoS-section" class="doc-section">
+                                    <h2 class="section-title">4.	DoS</h2>
+                                    <div id="step1"  class="section-block">
+                                    <h3 class="block-title">4.	DoS</h3>
+                                        <p>DoS related vulnerabilities are in the fourth tier of our ranking. This is the worst vulnerability ever, which can disable all services at the same time. DoS usually occurs due to improper validation and weak defense against fuzzing methods. As far as the application is concerned, DoS can only cause the application to crash or terminate immediately. In case of firmware or bootloader failure, there is a small chance to turn on the device afterwards.</p>
+                                        <P>The most important DoS vulnerabilities discovered in 2020 are shown there: </p>
+                                        <p>  - CVE-2020-27853</p>
+                                        <p>Wire before 2020-10-16 allows remote attackers to cause a denial of service (application crash) or possibly execute arbitrary code via a format string. This affects Wire AVS (Audio, Video, and Signaling) 5.3 through 6.x before 6.4, the Wire Secure Messenger application before 3.49.918 for Android, and the Wire Secure Messenger application before 3.61 for IOS. This occurs via the value parameter to sdp_media_set_lattr in peerflow/sdp.c.</p>
+                                        <p>  - CVE-2020-0469</p>
+                                        <p>In addEscrowToken of LockSettingsService.java, there is a possible loss of the synthetic password due to logic error. This could lead to local denial of service with no additional execution privileges needed. User interaction is not needed for exploitation.Product: AndroidVersions: Android-11Android ID: A-168692734</p>
+                                    </div>
+                                </section>
+
+                                <section id="5.Weakcryptography-section" class="doc-section">
+                                    <h2 class="section-title">5.	Weak cryptography</h2>
+                                    <div id="step1"  class="section-block">
+                                    <h3 class="block-title">5.	Weak cryptography</h3>
+                                        <p>Having less than 6%, weak or broken cryptography took the fifth place. CVE catalog does not contain much information about cryptography issues except for the simplest ones such as the hardcoded cryptographic keys and missed encryption, which do not require additional routines for exploitation. Performing strong encryption is a complex process, the developer must follow best practices to securely implement an encryption workflow.</p>
+                                        <p>There are some examples of sending sensitive data unencrypted over the network:</p>
+                                        <p>  - CVE-2020-13637</p>
+                                        <p>An issue was discovered in the stashcat app through 3.9.2 for macOS, Windows, Android, IOS, and possibly other platforms. It stores the client_key, the device_id, and the public key for end-to-end encryption in cleartext, enabling an attacker (by copying or having access to the local storage database file) to login to the system from any other computer, and get unlimited access to all data in the users' context.</p>
+                                        <P>  - CVE-2020-3841</P>
+                                        <P>The issue was addressed with improved UI handling. This issue is fixed in IOS 13.3.1 and iPadOS 13.3.1, Safari 13.0.5. A local user may unknowingly send a password unencrypted over the network.</P>
+                                    </div>
+                                </section>
+                     
+                                <section id="6.Insecurenetwork-section" class="doc-section">
+                                    <h2 class="section-title">6. Insecure network</h2>
+                                    <div id="step1"  class="section-block">
+                                    <h3 class="block-title">6.	Insecure network</h3>
+                                        <p>The last highlighted vulnerability is insecure network. This type of vulnerability arises due to network and firewall misconfiguration, improper certificate validation and so on. It allows Man-in-the-middle implementation to sniff the traffic from the specific application or from the entire device. Another way that insecure network vulnerabilities can arise is through the use of public Wi-Fi, which can be controlled by an attacker. Successful exploitation could lead to information disclosure, remote code execution or even privilege escalation by simulating a device.</p>
+                                        <p>There are enumerated the most significant insecure network vulnerabilities:</p>
+                                        <p>  - CVE-2020-0119</p>
+                                        <p>In addOrUpdateNetworkInternal and related functions of WifiConfigManager.java, there is a possible man in the middle attack due to improper certificate validation. This could lead to remote information disclosure with no additional execution privileges needed. User interaction is needed for exploitation.Product: AndroidVersions: Android-10Android ID: A-150500247</p>
+                                        <p>  - CVE-2020-8989</p>
+                                        <p>In the Voatz application 2020-01-01 for Android, the amount of data transmitted during a single voter's vote depends on the different lengths of the metadata across the available voting choices, which makes it easier for remote attackers to discover this voter's choice by sniffing the network. For example, a small amount of sniffed data may indicate that a vote was cast for the candidate with the least metadata. An active man-in-the-middle attacker can leverage this behavior to disrupt voters' abilities to vote for a candidate opposed by the attacker.</p>
+                                    </div> 
+                                </section>
+
+                                <section id="Whatmobilethreatsexpectin2021?-section" class="doc-section">
+                                    <h2 class="section-title">What mobile threats expect in 2021?</h2>
+                                    <div id="step1"  class="section-block">
+                                    <h3 class="block-title">What mobile threats expect in 2021?</h3>
+                                        <p>After preparing the statistics for the current year, we have analyzed the mobile attack surface and will try to guess what potential security threats mobile devices will face in 2021.
+                                        1.	Due to the significant number of privilege escalation and code injection vulnerabilities, the mobile environment is a great place to distribute and run malware, which is why malware will be the first threat in 2021. 
+                                        2.	The next major threats are data loss, privilege escalation and code execution, which will be relevant for several years as they were high for 2020. 
+                                        3.	As the time for SMS fraud is almost over, we may see phishing attacks targeting mobile users in 2021 and beyond. We have already encountered a couple of phishing attacks on Telegram users at the end of 2020 and this may become a serious problem in the coming years, since phishing URLs can be delivered also via SMS.
+                                        Having presented possible security threats in 2021, it should be clarified who will be the main target. Since installed applications can include chats, password managers and applications used for work, attackers can gain access to confidential documents, credentials and subsequently impersonate the current user to perform malicious actions against the company he works for, for example, to implement phishing or malware campaigns. As with web security the main target will be the company and its resources.</p>
+                                    </div>
+                                    
+                                </section>
+
+                                <section id="References-section" class="doc-section">
+                                    <h2 class="section-title">References</h2>
+                                    <div id="step1"  class="section-block">
+                                    <h3 class="block-title">References</h3>
+                                        <p>  - https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=ios</p>
+                                        <p>  - https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=android</p>
+                                    </div>
+                                </section>
+                        </div>
+                    </div>
+                           
+                                <!--Кінець наповнення-->
+                                    <!-- меню -->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#Executivesummary-section">Executive summary</a></li>
+                                <li><a class="scrollto" href="#Researchpreparation-section">Research preparation</a></li>
+                                <li><a class="scrollto" href="#Statistics-section">Statistics</a></li>
+                                <li><a class="scrollto" href="#1.InformationDisclosure-section">1. Information Disclosure</a></li>
+                                <li><a class="scrollto" href="#2.Privilegeescalation-section">2. Privilege escalation</a></li>
+                                <li><a class="scrollto" href="#3.Codeexecution-section">3. Code execution</a></li>
+                                <li><a class="scrollto" href="#4.DoS-section">4. DoS</a></li>
+                                <li><a class="scrollto" href="#5.Weakcryptography-section">5. Weak cryptography</a></li>
+                                <li><a class="scrollto" href="#6.Insecurenetwork-section">6. Insecure network</a></li>
+                                <li><a class="scrollto" href="#Whatmobilethreatsexpectin2021?-section">EWhat mobile threats expect in 2021?</a></li>
+                                <li><a class="scrollto" href="#References-section">References</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+    
+
+
+           

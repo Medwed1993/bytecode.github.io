@@ -1,0 +1,183 @@
+
+<head>
+    <title>Mobile app reverse engineering with Ghidra </title>  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">     
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    
+    
+</head>
+<body class="body-green">
+    <div class="page-wrapper">
+        <!-- Налаштування шапки-->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">My</span><span class="text-bold">Blog</span> 
+                        </a>
+                    </h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li> 
+                    <li class="active">Mobile app reverse engineering with Ghidra</li> 
+                </ol>
+            </div>
+        </header>
+         <!--Блок 1-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Mobile app reverse engineering with Ghidra</h1> <!--Назва статті -->
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: 17/02/2021</div> <!--Дата редагування-->
+                </div>
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                                <!--кінець Блок 1-->
+
+                                <!--Наповнення Сторінки -->
+                                <section id="Introductiontoreverseengineering-section" class="doc-section">
+                                    <h2 class="section-title">Introduction to reverse engineering</h2>
+                                    <div class="section-block">
+                                        <p> Reverse engineering is the long process of analyzing the low-level program code of an application. This step is necessary for the mobile penetration testing as it can reveal hidden or unused program features, bypass root access detection, discover hardcoded keys etc.
+                                            Reverse engineering can be done using various famous programs: JADX, Bytecode viewer, IDA Pro, Ghidra, JEB.</p>
+                                            <p>In this article, we will show you how to analyze a mobile application using Ghidra.</p>
+                                    </div>
+                                </section>
+                                <section id="WhatisGhidra-section" class="doc-section">
+                                    <h2 class="section-title">What is Ghidra</h2>
+                                    <div class="section-block">
+                                        <p>Before we start to reverse engineer the target app, we should have some understanding of Ghidra. Ghidra is a reverse engineering tool released by NSA and published for free use in 2019. </p>
+                                        <P>Ghidra supports many architectures, there is a complete list of them:</P>
+                                        <P>●	x86 16, 32 and 64 bit</P>
+                                        <P>●	ARM and AARCH64</P>
+                                        <P>●	PowerPC 32/64 and VLE</P>
+                                        <P>●	MIPS 16/32/64</P>
+                                        <P>●	MicroMIPS</P>
+                                        <P>●	68xxx</P>
+                                        <P>●	Java and DEX bytecode</P>
+                                        <P>●	PA-RISC</P>
+                                        <P>●	PIC 12/16/17/18/24</P>
+                                        <P>●	SPARC 32/64</P>
+                                        <P>●	CR16C</P>
+                                        <P>●	Z80</P>
+                                        <p>●	6502</p>
+                                        <P>●	8051</P>
+                                        <p>●	MSP430</p>
+                                        <P>●	AVR8, AVR32</P>
+                                        <P>●	SuperH</P>
+                                        <P>It is a great choice for analyzing Android applications as it has a built-in decompiler that makes the code easier to read rather than the assembler instructions, which are most likely ARM.</P>
+                                    </div>
+                                </section>
+                                <section id="AnalysiswithGhidra-section" class="doc-section">
+                                    <h2 class="section-title">Analysis with Ghidra</h2>
+                                    <div class="section-block">
+                                        <p>  Let us take the vulnerable password manager sieve.apk. First, we import the apk file into Ghidra. Then we examine the contents of the package. It includes 3 ARM libraries: gdbserver, libdecrypt.so and libencrypt.so. The last two native libraries are the most interesting for us, so we need to take a look at the sieve classes that can work with them.</p>
+                                        <img src="img/blog2/1.jpg">
+                                        <P>The Sieve application declares CryptoService.class, which probably does encryption and decryption using the library methods. This is where we are going to start.</P>
+                                        <img src="img/blog2/2.jpg">
+                                        <p>Getting started disassembling with CryptoService.class, we have the following list of methods:</p>     
+                                        <img src="img/blog2/3.jpg">
+                                        <P>Each method has a type signature after the name. At that time we have to introduce Java Native Interface, JNI for short. JNI allows Java code to call and to be called by native libraries. By using this concept developers can write C and C++ code, where there is no Java implementation.</P>
+                                        <P>Let us define a list of type signatures with associated Java types:</P>  
+                                        <P>●	V - void</P>
+                                        <P>●	Z - boolean</P>
+                                        <P>●	B - byte</P>
+                                        <P>●	C - char</P>
+                                        <P>●	S - short</P>
+                                        <P>●	I - int</P>
+                                        <P>●	J - long</P>
+                                        <P>●	F - float</P>
+                                        <P>●	D - double</P>
+                                        <P>●	L fully-qualified-class ; - fully-qualified-class</P>
+                                        <P>●	[ type - type[]</P>
+                                        <P>●	( arg-types ) ret-type - method type</P>
+                                        <P>Returning to the screenshot above, we are trying to understand the declaration of decrypt method.</P>
+                                        <P> <em>decrypt(Ljava/lang/String;[B)Ljava/lang/String;</em></P>
+                                        <P>The method takes two arguments, the first one is a fully qualified class java/lang/String, so it is a simple string and the second is a byte array. The return type is string as well as the type of the first argument</P>
+                                        <P>So the declaration of decrypt method in Java programming language looks like this:</P>
+                                        <P> <em>string decrypt(string str, byte[] arr);</em></P>
+                                        <P>Continuing the analysis, we are trying to find operations with native libraries.</P>
+                                        <P>Looking at the static initializer <clinit>()V or void <clinit>(), as we already know, we observe System.loadLibrary calls. That's it!</P>
+                                        <img src="img/blog2/4.jpg">
+                                        <P>At this point, we should know the basics of importing native libraries. There are 2 methods to do that by using:</P>
+                                        <P>●	System.loadLibrary(encrypt)</P>
+                                        <P>●	System.load("lib/armeabi/libencrypt.so")</P>
+                                        <P>The first method does not explicitly indicate the location of the library, whereas the system has to determine the cpu and make a path itself, as in the second method. Also when using loadLibrary we only specify the name of the library without lib prefix.
+                                        Thus, the application loads libencrypt.so and libdecrypt.so in order to use methods from them.</p>
+                                        <P>At the moment we have to check all methods and find those that are not included in the class. Let us analyze decrypt method, there is runNDKdecrypt call. The name contains NDK (Native Development Kit), just like JNI, it allows developers to write C and C++ code for Android applications, so we can already go to libdecrypt.so library to explore this method.</P>
+                                        <img src="img/blog2/5.jpg">
+                                        <P>Method encrypt also calls a function from native library, but in this article we move on with runNDKdecrypt.</P>
+                                        <img src="img/blog2/6.jpg">
+                                        <P>Then we have to go back to the file browser window in Ghidra and load libdecrypt.so for later analysis. When looking for runNDKdecrypt function, we came across with Java_com_mwr_example_sieve_CryptoService_runNDKdecrypt, which is an example of dynamic linking followed by Java prefix, package name, class name and method name separated by an underscore (_).</P>
+                                        <img src="img/blog2/7.jpg">
+                                        <P>Looking at the decompiled code, we need to determine the encryption algorithm used by the password manager. On line 76, there is call of decrypt function.</P>
+                                        <img src="img/blog2/8.jpg">
+                                        <P>By looking inside decrypt function, you can find constant values such as 0xc6ef3720 and 0x61c88647. After a bit of googling, we found it to be Tiny Encryption Algorithm block cipher. </P>
+                                        <img src="img/blog2/9.jpg">
+                                        <P>*You can notice the multiplication by 0x10 in the screenshot, where it should be rotated left on 4. 0x10 in decimal is 16 and multiplying by 16 is the same as rotate left on 4.</P>
+                                    </div>
+                                </section>
+                                        <section id="Conclusion-section" class="doc-section">
+                                            <h2 class="section-title">Conclusion</h2>
+                                            <div class="section-block">
+                                                <p>Finally, the encryption/decryption procedure used in sieve application is done through TEA. This knowledge gives us the ability to manually decrypt and encrypted data on the side. </p>
+                                                <P>In this research we learned how to use Ghidra during mobile penetration testing, how Ghidra works with native libraries and learned what JNI and NDK are. </P>
+                                            </div>
+                                        </section>
+                                            <section id="References-section" class="doc-section">
+                                                <h2 class="section-title">References</h2>
+                                                <div class="section-block">
+                                                    <P>●	https://ghidra-sre.org</P>
+                                                    <P>●	https://github.com/as0ler/Android-Examples/blob/master/sieve.apk</P>
+                                                    <P>●	https://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm</P>
+                                                </div>
+                                            </section>
+                        </div>
+                    </div>
+
+                             <!--Кінець наповнення-->
+                                    <!--меню-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#nul-section">        </a></li>
+                                <li><a class="scrollto" href="#nul-section">        </a></li>
+                                <li><a class="scrollto" href="#Introductiontoreverseengineering-section">Introduction to reverse engineering</a></li>
+                                <li><a class="scrollto" href="#WhatisGhidra-section">What is Ghidra</a></li>
+                                <li><a class="scrollto" href="#AnalysiswithGhidra-section">Analysis with Ghidra</a></li>
+                                <li><a class="scrollto" href="#Conclusion-section">Conclusion</a></li>
+                                <li><a class="scrollto" href="#References-section">References</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+    
+
+
+           
