@@ -1,0 +1,152 @@
+<html>
+<head>
+    <title>Analysis of testing approaches to Android mobile application vulnerabilities</title>  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">     
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    
+    
+</head>
+
+<body class="body-blue">
+    <div class="page-wrapper">
+        
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">BYTECODE </span><span class="text-bold">BLOG </span> 
+                        </a>
+                    </h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li> 
+                    <li class="active">Securing an application written in C#</li> 
+                </ol>
+            </div>
+        </header>
+        <div class="doc-wrapper">
+            <div class="container">
+                    <div id="doc-header" class="doc-header text-center">
+                        <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Securing an application written in C#</h1> 
+                        
+                            <div class="meta"><i class="fa fa-clock-o"></i> Last updated: 14/04/21</div>
+                    </div>
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                                
+
+                                
+                                <section id="Introduction-section" class="doc-section">
+                                    <h2 class="section-title">Introduction</h2>
+                                    <div id="step1"  class="section-block">
+                                        <P>The issue of intellectual property protection always arises among developers.
+                                            Unfortunately, programs written in .NET are quite easy to "open".
+                                            Even Visual Studio comes with ILDasm disassembler.
+                                            With the wrong application architecture, all attempts to protect it will be immediately doomed.
+                                            So, if you write a client-server application in which all the logic is calculated on the server, and the client itself simply serves to display the results on the user's screen, then there is even no point in protecting such a program - the keys are stored in the database on the server and when connected, they are simply checked by base.
+                                            In this case, there is not much valuable in the client code.
+                                            Serious products are tied to electronic keys inserted into a PC, but ordinary developers simply do not have such capabilities.
+                                            The main problem with .NET programs in this area is the easy way to get the source code.
+                                            For example, you can use the free dotPeek from JetBrains.
+                                            Based on the well-known Resharper from the same studio, this tool allows you to easily reveal the insides of the current program, if an unlucky programmer did not take care of its protection.</P>
+                                            <p>There are two important dotPeek functions in this area:
+                                                1) Decompilation of .NET assemblies to the C# source code and IL code
+                                                To display the decompiled code dotPeek uses most familiar to users functions of Microsoft Visual Studio: syntax highlighting, opening decompiled files in separate tabs, folding/deploying code blocks, row numbering and much more.
+                                                2) export and convert .NET assemblies to Microsoft Visual Studio projects
+                                                If there is a need not only to explore the assembly, but also make changes to it, dotPeek allows you to edit and save it to the Microsoft Visual Studio project and continue working with the assembly source code.</p>
+                                    </div>
+                                </section>
+
+                                <section id="C# application protection methods-section" class="doc-section">
+                                    <h2 class="section-title">C# application protection methods</h2>
+                                    <div id="step1"  class="section-block">
+                                        <P>Of course, when everyone knows that a C# program can be "hacked" by any user, there are retaliatory measures.
+                                            1) Obfuscation
+                                            The first trivial measure of protection against such an impact is application obfuscation.
+                                             In other words, you need to confuse the source code as much as possible, in the meantime saving it's functionality.
+                                             Quite an effective way, if not for one "but" - there are a lot of deobfuscators for public obfuscators.</P>
+                                             <P>In addition, most of obfuscators are expensive, and often their functionality leaves much to be desired.
+                                                Sometimes, after such obfuscation, the program may even stop working normally, especially if you converted it with a hacked obfuscator.
+                                                Of course, Microsoft has integrated the free Dotfuscator Software Services into Visual Studio.
+                                                Rather, it is free only for personal use, for business it is very expensive.
+                                                Another obfuscator is ConfuserEx.  It is open source and provides very strong protection.
+                                                However, it's work can still be removed with De4dot, if the reverse engine detects it correctly.</P>
+                                                <P>2) Cryptors, packers and protectors
+                                                    In fact, although they provide strong protection, most projects are simply abandoned or they cost insanely big money.
+                                                     As an example, AZProtect 0001 is able to bind executable files in WinPE32 EXE format to the serial number of HDD, FDD, CDRO, etc.  for launch from the selected device only.
+                                                     The task of this program is to make it impossible to launch a protected application on another machine / from another disk.
+                                                     Successful operation of the protector is achieved if there are functions from KERNEL in the import table of the protected WinAPI application, such as GetProcAddressA, LoadLibraryA or GetModuleHandle.</P>
+                                                     <P>3) Internal development tools
+                                                        For example, Microsoft has developed .NET Native technology that allows you to compile a .NET application into native code.
+                                                         In this case, the reverse engineer will see a very curious C++ code with automatic code by the .NET AOT compiler, which will greatly complicate hacking and reversing the application.
+                                                         However, this method also has a problem - everything will work only on the Microsoft platform.</P>
+                                    </div>
+                                </section>
+                                <section id="Conclusions-section" class="doc-section">
+                                    <h2 class="section-title">Conclusions</h2>
+                                    <div id="step1"  class="section-block">
+                                        <P>The issue of protecting intellectual property has always been a separate problem for developers.
+                                            Piracy and anti-piracy literally stick hand in hand, creating all sorts of instruments.
+                                            C# applications were originally vulnerable to reversing.
+                                            Obfustration confuses tools like Dotpeek or IlSpy.
+                                            But it is important to understand that they all have added a lot of plugins that allow to determine the protection and remove it in every way.
+                                            Nevertheless, do not neglect this methods.
+                                            If you know for sure that the application will be written only for the Microsoft platform, then it will be compiled the to the native code using the .NET Native.
+                                            However, nothing of the above does not give a hundred percent warranty on protecting the application from hacking.</P>
+                                    </div>
+                                    </section>
+                                    <section id="References-section" class="doc-section">
+                                        <h2 class="section-title">References</h2>
+                                        <div id="step1"  class="section-block">
+                                            <P>https://docs.microsoft.com/en-us/dotnet/framework/net-native/getting-started-with-net-native</P>
+                                            <P>http://blogs.kpi.kharkov.ua/v2/asm/soft/upakovshhiki-i-protektory/</P>
+                                            <P>https://www.jetbrains.com/ru-ru/decompiler/</P>
+                                        </div>
+                                    </section>
+
+                                
+                              
+                        </div>
+                    </div> 
+                  
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                
+                                <li><a class="scrollto" href="#Introduction-section">Introduction</a></li>
+                                <li><a class="scrollto" href="#C# application protection methods">C# application protection methods</a></li>
+                                <li><a class="scrollto" href="#Conclusions-section">Conclusions</a></li>
+                                <li><a class="scrollto" href="#References-section">References</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+</html>
+    
+
+
+           
